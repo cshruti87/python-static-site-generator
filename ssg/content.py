@@ -9,12 +9,12 @@ class Content(Mapping):
     @classmethod
     def load(cls, string):
         _, fm, content = cls.__regex.split(string, 2)
-        load(fm, Loader=FullLoader)
-        return cls(cls.metadata, content)
+        metadata = load(fm, Loader=FullLoader)
+        return cls(metadata, content)
 
     def __init__(self, metadata, content):
         self.data = metadata
-        self.data = {'content': content}
+        self.data["content"] = content
 
     @property
     def body(self):
@@ -37,7 +37,7 @@ class Content(Mapping):
         self.data.__iter__()
 
     def __len__(self):
-        return self.data.__len__()
+        return len(self.data)
 
     def __repr__(self):
         data = dict()
